@@ -1,0 +1,277 @@
+
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Иса сааттары</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f3ef;
+  color: #222;
+}
+
+header {
+  background: #111;
+  color: #d4af37;
+  padding: 22px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.logo {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.cart {
+  color: white;
+  font-size: 16px;
+}
+
+.hero {
+  text-align: center;
+  padding: 65px 20px;
+  color: white;
+  background: linear-gradient(135deg, #171717, #51401b);
+}
+
+.hero h1 {
+  font-size: 36px;
+  margin-bottom: 15px;
+}
+
+.hero p {
+  font-size: 17px;
+  margin-bottom: 25px;
+}
+
+.hero a {
+  display: inline-block;
+  background: #d4af37;
+  color: #111;
+  padding: 13px 25px;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+.search {
+  display: block;
+  width: 90%;
+  max-width: 500px;
+  margin: 25px auto;
+  padding: 13px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+h2 {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 20px 5%;
+}
+
+.product {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 3px 12px #00000012;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.product img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  background: #eee;
+}
+
+.product h3 {
+  margin: 15px 5px 8px;
+}
+
+.price {
+  color: #a47c12;
+  font-size: 21px;
+  font-weight: bold;
+  margin: 10px;
+}
+
+.product button {
+  background: #171717;
+  color: #d4af37;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.product button:hover {
+  background: #d4af37;
+  color: #111;
+}
+
+.empty {
+  display: none;
+  text-align: center;
+  padding: 20px;
+}
+
+footer {
+  margin-top: 35px;
+  background: #111;
+  color: white;
+  text-align: center;
+  padding: 30px 15px;
+}
+
+footer p {
+  margin: 8px;
+}
+
+footer a {
+  color: #d4af37;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">⌚ ИСА СААТТАРЫ</div>
+  <div class="cart">
+    🛒 Себет: <span id="count">0</span>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Иса сааттарына кош келиңиз!</h1>
+  <p>Стилдүү сааттар — ар бир мүнөтүңүз баалуу.</p>
+  <a href="#products">Сааттарды көрүү</a>
+</section>
+
+<input
+  type="text"
+  id="search"
+  class="search"
+  placeholder="🔍 Саат издөө..."
+  oninput="searchProducts()"
+>
+
+<h2 id="products">⌚ Биздин сааттар</h2>
+
+<div class="products" id="productList">
+
+  <div class="product" data-name="классикалык саат">
+    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80" alt="Классикалык саат">
+    <h3>Классикалык саат</h3>
+    <p>Күнүмдүк тагынууга</p>
+    <div class="price">2 500 сом</div>
+    <button onclick="buy('Классикалык саат', 2500)">Сатып алуу</button>
+  </div>
+
+  <div class="product" data-name="алтын түстүү саат">
+    <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=600&q=80" alt="Алтын түстүү саат">
+    <h3>Алтын түстүү саат</h3>
+    <p>Өзгөчө стил үчүн</p>
+    <div class="price">4 500 сом</div>
+    <button onclick="buy('Алтын түстүү саат', 4500)">Сатып алуу</button>
+  </div>
+
+  <div class="product" data-name="спорт сааты">
+    <img src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=600&q=80" alt="Спорт сааты">
+    <h3>Спорт сааты</h3>
+    <p>Активдүү жашоо үчүн</p>
+    <div class="price">3 000 сом</div>
+    <button onclick="buy('Спорт сааты', 3000)">Сатып алуу</button>
+  </div>
+
+  <div class="product" data-name="люкс саат">
+    <img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=600&q=80" alt="Люкс саат">
+    <h3>Люкс саат</h3>
+    <p>Элеганттуу дизайн</p>
+    <div class="price">6 000 сом</div>
+    <button onclick="buy('Люкс саат', 6000)">Сатып алуу</button>
+  </div>
+
+</div>
+
+<p class="empty" id="empty">Саат табылган жок.</p>
+
+<section style="text-align:center; padding:30px 15px;">
+  <h2>Биз жөнүндө</h2>
+  <p>«Иса сааттары» — стилдүү сааттарды тандоо дүкөнү.</p>
+  <p style="margin-top:12px;">Сапат, стиль жана ишеним!</p>
+</section>
+
+<footer>
+  <h3>⌚ Иса сааттары</h3>
+  <p>Сиздин убактыңыз — биздин баалуулук!</p>
+  <p>Байланыш: <a href="https://wa.me/" target="_blank">WhatsApp аркылуу жазыңыз</a></p>
+  <p>© 2026 Иса сааттары</p>
+</footer>
+
+<script>
+let count = 0;
+let total = 0;
+let cart = [];
+
+function buy(name, price) {
+  cart.push({name: name, price: price});
+  count++;
+  total += price;
+
+  document.getElementById("count").textContent = count;
+
+  alert(
+    name + " себетке кошулду!\n" +
+    "Саны: " + count + "\n" +
+    "Жалпы сумма: " + total.toLocaleString("ru-RU") + " сом"
+  );
+}
+
+function searchProducts() {
+  const query = document.getElementById("search").value
+    .toLowerCase().trim();
+
+  const products = document.querySelectorAll(".product");
+  let visible = 0;
+
+  products.forEach(function(product) {
+    const name = product.dataset.name.toLowerCase();
+    const show = name.includes(query);
+
+    product.style.display = show ? "block" : "none";
+
+    if (show) visible++;
+  });
+
+  document.getElementById("empty").style.display =
+    visible === 0 ? "block" : "none";
+}
+</script>
+
+</body>
+</html>
